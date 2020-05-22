@@ -1,0 +1,13 @@
+<!--pages/wxml/index.wxml-->
+<!--一个简单的文本标签 -->
+<text>hello world</text>
+
+<!-- view 中包含了 text 标签 -->
+<view>
+  <text>hello world</text>
+</view>
+<image class="temp-image" src="./image/a.png" ></image>
+<text>当前时间：{{time}}</text>
+<view>
+  <text data-test="{{time}}"> hello world</text>
+</view>

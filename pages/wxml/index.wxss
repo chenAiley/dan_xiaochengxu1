@@ -1,0 +1,6 @@
+/* pages/wxml/index.wxss */
+.temp-image {
+  width: 60px;
+  height: 30px;
+  margin: 0 40%;
+}
