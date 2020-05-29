@@ -52,6 +52,7 @@ Page({
     })
   },
   skipTo: function() {
-    this.setData({ skipMsg: "跳转成功啦" })
+   // this.setData({ skipMsg: "跳转成功啦1" })
+    wx.navigateTo({ url: '../../pages/wxml/index?id=1&other=abc' })
   }
 })

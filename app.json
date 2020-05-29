@@ -1,14 +1,14 @@
 {
-  "pages":[
-    "pages/wxml/index",
+  "pages": [
     "pages/index/index",
+    "pages/wxml/index",
     "pages/logs/logs"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "dan练习project1",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

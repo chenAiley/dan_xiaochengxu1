@@ -1,13 +1,27 @@
 <!--pages/wxml/index.wxml-->
 <!--一个简单的文本标签 -->
+<!--<include src="../index/index.wxml"/> -->
 <text>hello world</text>
 
 <!-- view 中包含了 text 标签 -->
 <view>
-  <text>hello world</text>
+  <image class="temp-image" src="./image/a.png" ></image>
 </view>
-<image class="temp-image" src="./image/a.png" ></image>
-<text>当前时间：{{time}}</text>
 <view>
-  <text data-test="{{time}}"> hello world</text>
+  <text>当前时间：{{time}}</text>
+  <text data-test="{{'当前'+time}}"> hello world</text>
 </view>
+<view>
+  <text>详情id:{{detail.id}}</text>
+  <text>详情描述:{{detail.other}}</text>
+</view>
+<view wx:for="{{array}}" wx:key="index">
+  {{index}}: {{item.message}}
+</view>
+<template name="msgItem">
+  <view>
+    <text> {{index}}: {{msg}} </text>
+    <text> Time: {{time}} </text>
+  </view>
+</template>
+<template is="msgItem" data="{{...item}}"/>

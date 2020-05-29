@@ -15,3 +15,10 @@
     <text class="user-motto">{{motto}}</text>
   </view>
 </view>
+
+<template name="msgItem">
+    <view>
+      <text> {{index}}: {{msg}} </text>
+      <text> Time: {{time}} </text>
+    </view>
+  </template>
