@@ -1,0 +1,75 @@
+/* pages/add/index.wxss */
+.add-head{
+  width: 100%;
+  margin-left: 40rpx;
+  display: flex;
+  flex-direction: row;
+}
+.add-type{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.add-detail{
+  width: 95%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.add-info{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.date-info{
+  border-right: 1px solid #999;
+  text-align: center;
+}
+.amount-info{
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 15px;
+}
+.my-amount{
+  padding: 0 !important;
+  height: 20px !important;
+}
+.amount-text{
+  color: #ed3f14;
+  position: relative;
+  right: -15px;
+  z-index: 9;
+}
+.add-remark{
+  width: 100%;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+}
+.remark-icon{
+  padding: 5px;
+}
+.remark-input{
+  padding: 0 10px !important;
+}
+.add-type{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.type-detail{
+  border-right: 1px solid #999;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.temp-text{
+  font-size: 12px;
+  color: #999;
+  font-weight: bold;
+}

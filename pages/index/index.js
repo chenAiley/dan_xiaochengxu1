@@ -4,8 +4,8 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World2',
     userInfo: {},
+    currentTab: app.globalData.currentTab,
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
@@ -51,8 +51,38 @@ Page({
       hasUserInfo: true
     })
   },
-  skipTo: function() {
-   // this.setData({ skipMsg: "跳转成功啦1" })
-    wx.navigateTo({ url: '../../pages/wxml/index?id=1&other=abc' })
+  // 跳转记账页面
+  gotoAdd: function() {
+    wx.navigateTo({ url: '../../pages/add/index?id=1&other=111' })
+  },
+  // 跳转历史账单页面
+  getHistory: function() {
+    wx.navigateTo({ url: '../../pages/history/index?id=2&other=222' })
+  },
+  // 跳转账单详情页面
+  getDetail: function() {
+    wx.navigateTo({ url: '../../pages/detail/index?id=3&other=333' })
+  },
+  onPullDownRefresh: function() {
+    // 用户触发了下拉刷新操作
+    wx.showToast({ // 显示Toast
+      title: '上拉刷新了',
+      icon: 'success',
+      duration: 1500
+    })
+  },
+  onReachBottom: function() {
+    // 当界面的下方距离页面底部距离小于100像素时触发回调
+    wx.showToast({ // 显示Toast
+      title: '下拉触发',
+      icon: 'success',
+      duration: 1500
+    })
+  },
+  handleTabChange: function ({ detail }) {
+    this.setData({
+      currentTab: detail.key
+    });
+    app.globalData.currentTab = deatil.key;
   }
 })

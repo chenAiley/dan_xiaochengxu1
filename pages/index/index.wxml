@@ -1,24 +1,44 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
   <view>
-    <button bindtap="skipTo">点击跳转</button>
-    <text class="user-motto">{{skipMsg}}</text>
+    <i-button bind:click="gotoAdd"
+      type="success" shape="circle">
+      <i-icon type="brush_fill" />
+      <text>记一笔</text>
+      <!-- 点击跳转 记账页面 -->
+    </i-button>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="cd-circle"> 
+    <view class="icon-circle">
+      <i-icon type="createtask" size="20" style="margin-top: 30rpx;"/></view>
+    <view class="icon-circle icon-text" bindtap="getHistory">账单记录</view>
+    <!-- 点击账单记录，跳转账单记录，可查询所有历史账单 -->
+  </view>
+
+  <!-- 今天、昨天的账单记录 -->
+  <view class="record-block">
+    <view class="record-detail" wx:for="{{['昨天', '今天']}}">
+      <text>{{item}}(-20.0)</text>
+      <view>
+        <view wx:for="{{[1, 2, 3]}}" class="detail-type" 
+          hover-class="hover" bindtap="getDetail">
+        <view class="type">
+          <i-icon type="createtask" size="20"/>
+          <view>类别</view>
+        </view>
+        <view class="type" style="text-align: left;">
+          <text>金额1111</text>
+          <view>备注</view>
+        </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="footer">
+    <i-tab-bar current="{{ currentTab }}" color="#ed3f14" bindchange="handleTabChange" style="width: 100%;">
+      <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="记账"></i-tab-bar-item>
+      <i-tab-bar-item key="group" icon="group" current-icon="activity_fill" title="资产"></i-tab-bar-item>
+      <i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" title="我的"></i-tab-bar-item>
+    </i-tab-bar>
   </view>
 </view>
-
-<template name="msgItem">
-    <view>
-      <text> {{index}}: {{msg}} </text>
-      <text> Time: {{time}} </text>
-    </view>
-  </template>

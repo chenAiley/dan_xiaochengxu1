@@ -1,0 +1,59 @@
+<!--pages/add/index.wxml-->
+<wxs module="filters" src="../../js/filters.wxs"></wxs>
+<view class="container">
+  <!-- <view class="add-head">
+    <i-icon type="return" bindtap="returBack"/>
+  </view> -->
+  <view class="add-type">
+    <i-tabs current="{{ currentType }}" color="#ed3f14" bindchange="handleTypeChange" style="width: 100%">
+      <i-tab key="tab1" title="支出"></i-tab>
+      <i-tab key="tab2" title="收入"></i-tab>
+    </i-tabs>
+  </view>
+
+  <view class="add-detail">
+    <view class="add-info">
+      <view class="date-info"  style="width: 40%;">
+        <picker mode="date" value="{{date}}" bindchange="handleDateChange">
+          {{date}}
+        </picker>
+      </view>
+      <view class="date-info" style="width: 30%;">
+        <picker value="{{account}}" bindchange="handleAccountChange" range="{{accountList}}">
+          {{account}}
+        </picker>
+      </view>
+      <view class="amount-info" style="width: 30%;">
+        <text class="amount-text">{{ currentType == 'tab1' ? '-' : '+'}}</text>
+        <i-input value="{{ amount }}" autofocus type="digit" maxlength="9"
+        right placeholder="0.00" i-class="my-amount" bindchange="moneyInput"/>
+      </view>
+    </view>
+    <view class="add-remark">
+      <i-icon type="editor" size="20" i-class="remark-icon"/>
+      <i-input value="{{ value1 }}" autofocus type="textarea"
+      placeholder="输入备注" i-class="remark-input" style="width: 80%"/>
+      <!-- 点击添加图片 -->
+      <i-icon type="picture_fill" size="28" i-class="remark-icon"
+      style="color: #2d8cf0"
+      bindtap="addPicture"/>
+    </view>
+    <!-- 账单类别 -->
+    <view class="add-type">
+      <view style="width: 30px;text-align: center; color: #ed3f14">
+        <i-icon type="emoji" size="28"/>
+      </view>
+      <view>
+        <picker mode="multiSelector" value="{{recordType}}" 
+          range="{{recordTypeList}}" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange">
+          <text class="temp-text">{{recordTypeList[0][recordType[0]]}} </text>
+          <text style="color: #999"> | </text>
+          <text style="color: #ff9900">{{recordTypeList[1][recordType[1]]}}</text>
+        </picker>
+      </view>
+    </view>
+
+    <view class="add-pic">
+    </view>
+  </view>
+</view>

@@ -4,7 +4,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
+  justify-content: center;
+  padding: 20rpx 0;
   box-sizing: border-box;
 } 
+.cd-circle{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  border: 3rpx solid #ed3f14;
+}
+.icon-circle {
+  display: flex;    /*设置显示样式**/
+  align-items: center;    /**子view垂直居中*/
+  justify-content: center; /**内容居中*/
+}
+.icon-text{
+  font-size: 14px;
+  font-weight: 600;
+}
+/* 点击样式 */
+.hover{
+  background-color: gray;
+}
+
+/* 页面底部bar样式 */
+.footer{
+  width: 100%;
+  position: fixed;
+  bottom: 10rpx;
+}
