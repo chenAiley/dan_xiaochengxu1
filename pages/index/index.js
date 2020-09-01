@@ -83,6 +83,6 @@ Page({
     this.setData({
       currentTab: detail.key
     });
-    app.globalData.currentTab = deatil.key;
+    app.globalData.currentTab = detail.key;
   }
 })

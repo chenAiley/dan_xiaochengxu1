@@ -1,17 +1,15 @@
 <!--index.wxml-->
+<import src="../../component/template/footTabBar.wxml"/>
 <view class="container">
-  <view>
-    <i-button bind:click="gotoAdd"
-      type="success" shape="circle">
-      <i-icon type="brush_fill" />
-      <text>记一笔</text>
+  <view class="add-button">
+    <i-button bind:click="gotoAdd" size="small" type="success" shape="circle">
+      <i-icon type="brush_fill"/>记一笔
       <!-- 点击跳转 记账页面 -->
     </i-button>
   </view>
-  <view class="cd-circle"> 
-    <view class="icon-circle">
-      <i-icon type="createtask" size="20" style="margin-top: 30rpx;"/></view>
-    <view class="icon-circle icon-text" bindtap="getHistory">账单记录</view>
+  <view class="cd-circle" style="margin-top: 30px;" hover-class="hover"> 
+    <i-icon type="createtask" size="20"/>
+    <view class="icon-text" bindtap="getHistory">账单记录</view>
     <!-- 点击账单记录，跳转账单记录，可查询所有历史账单 -->
   </view>
 
@@ -19,26 +17,26 @@
   <view class="record-block">
     <view class="record-detail" wx:for="{{['昨天', '今天']}}">
       <text>{{item}}(-20.0)</text>
-      <view>
-        <view wx:for="{{[1, 2, 3]}}" class="detail-type" 
+      <view style="overflow-y: auto;max-height: 200px;">
+        <view wx:for="{{[1, 2, 3,4,5,6]}}" class="detail-type" 
           hover-class="hover" bindtap="getDetail">
-        <view class="type">
+        <view class="type" style="width: 40%">
           <i-icon type="createtask" size="20"/>
-          <view>类别</view>
+          <view class="type-text1">类别</view>
         </view>
-        <view class="type" style="text-align: left;">
+        <view class="type" style="width: 60%;text-align: left;">
           <text>金额1111</text>
-          <view>备注</view>
+          <view class="type-text2">备注</view>
         </view>
         </view>
       </view>
     </view>
   </view>
+
+<!-- 中间分隔线 -->
+  <view class="split-border"></view>
+
   <view class="footer">
-    <i-tab-bar current="{{ currentTab }}" color="#ed3f14" bindchange="handleTabChange" style="width: 100%;">
-      <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="记账"></i-tab-bar-item>
-      <i-tab-bar-item key="group" icon="group" current-icon="activity_fill" title="资产"></i-tab-bar-item>
-      <i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" title="我的"></i-tab-bar-item>
-    </i-tab-bar>
+    <template is="footTabBar" data="{{currentTab}}"></template>
   </view>
 </view>

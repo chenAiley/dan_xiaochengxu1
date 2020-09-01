@@ -3,6 +3,7 @@
     "i-icon": "../../dist/icon/index",
     "i-tabs": "../../dist/tabs/index",
     "i-tab": "../../dist/tab/index",
-    "i-input": "../../dist/input/index"
+    "i-input": "../../dist/input/index",
+    "i-button": "../../dist/button/index"
   }
 }

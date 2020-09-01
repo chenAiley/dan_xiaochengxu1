@@ -1,10 +1,11 @@
 {
   "pages": [
-    "pages/add/index",
     "pages/index/index",
+    "pages/add/index",
     "pages/history/index",
     "pages/detail/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/test/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -12,7 +13,6 @@
     "navigationBarTitleText": "随记",
     "navigationBarTextStyle": "black"
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json",
   "networkTimeout": {
     "request": 3000

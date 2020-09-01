@@ -13,19 +13,19 @@
   height: 180rpx;
   border-radius: 50%;
   border: 3rpx solid #ed3f14;
-}
-.icon-circle {
-  display: flex;    /*设置显示样式**/
-  align-items: center;    /**子view垂直居中*/
-  justify-content: center; /**内容居中*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .icon-text{
   font-size: 14px;
-  font-weight: 600;
+  font-weight: bolder;
 }
 /* 点击样式 */
 .hover{
-  background-color: gray;
+  /* background-color: #ccc; */
+  cursor: pointer;
 }
 
 /* 页面底部bar样式 */
@@ -33,4 +33,11 @@
   width: 100%;
   position: fixed;
   bottom: 10rpx;
+}
+/* 中间分隔线 */
+.split-border{
+  height: 100px;
+  border-right:1rpx solid #999;
+  position: fixed;
+  top: 50%;
 }

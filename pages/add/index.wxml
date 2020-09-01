@@ -1,5 +1,4 @@
 <!--pages/add/index.wxml-->
-<wxs module="filters" src="../../js/filters.wxs"></wxs>
 <view class="container">
   <!-- <view class="add-head">
     <i-icon type="return" bindtap="returBack"/>
@@ -31,7 +30,7 @@
     </view>
     <view class="add-remark">
       <i-icon type="editor" size="20" i-class="remark-icon"/>
-      <i-input value="{{ value1 }}" autofocus type="textarea"
+      <i-input value="{{ remark }}" type="textarea"
       placeholder="输入备注" i-class="remark-input" style="width: 80%"/>
       <!-- 点击添加图片 -->
       <i-icon type="picture_fill" size="28" i-class="remark-icon"
@@ -54,6 +53,13 @@
     </view>
 
     <view class="add-pic">
+      <view wx:for="{{[1,2,3]}}" style="width: 30%;">
+        <image mode="widthFix" src="../../image/tu1.png" style="width: 100%;max-height: 180px"></image>
+      </view>
     </view>
+  </view>
+
+  <view class="add-footer">
+   <i-button bind:click="handleOk" shape="circle" type="error" size="small">添加</i-button>
   </view>
 </view>
