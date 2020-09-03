@@ -1,5 +1,6 @@
 // pages/add/index.js
-var util = require('../../utils/util.js');  
+var dateJS = require('../../js/date.js');  
+var constant = require('../../js/constant.js'); 
 
 Page({
 
@@ -7,22 +8,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentType: 'tab1',
-    date: util.formatTime(new Date()).substring(0,10),
+    currentType: 'out',
+    date: dateJS.formatTime(new Date()).substring(0,10),
     account: '支付宝',
     accountList: ["支付宝","微信","现金","储蓄卡","信用卡"],
-    objectAccountList: [
-      {name: "支付宝", id: "zfb"},
-      {name: "微信", id: "wx"},
-      {name: "现金", id: "xj"},
-      {name: "储蓄卡", id: "cxk"},
-      {name: "信用卡", id: "xyk"},
-    ],
     amount: 17.5,
     typeList: [["餐饮","水果","零食","饮料", "其他"],["衣服", "鞋子", "配饰", "其他"], ["护肤", "美妆", "清洁", "其他"], ["居住", "家用", "其他"],["地铁公交", "出租车", "火车高铁", "飞机", "其他"]],
     recordTypeList: [["吃", "穿", "用", "住", "行"], ["餐饮","水果","零食","饮料", "其他"]],
     recordType:[0,0],
-    remark: '' //备注
+    remark: '', //备注
+    fileList: [],
+    autoHeight: {maxHeight: 30},
   },
 
   /**
@@ -83,7 +79,7 @@ Page({
 
   handleTypeChange: function ({detail}) {
     this.setData({
-      currentType: detail.key
+      currentType: detail.name
     });
   },
   bindMultiPickerChange: function (e) {
@@ -100,20 +96,86 @@ Page({
     data.recordTypeList[1] = this.data.typeList[this.data.recordType[0]];
     this.setData(data);
   },
-  moneyInput({detail}) {
+  amountChange({detail}) {
     var money;
-    if (/^(\d?)+(\.\d{0,2})?$/.test(detail.detail.value)) { //正则验证，金额小数点后不能大于两位数字
-      money = detail.detail.value;
+    if (/^(\d?)+(\.\d{0,2})?$/.test(detail)) { //正则验证，金额小数点后不能大于两位数字
+      money = detail;
     } else {
-      money = detail.detail.value.substring(0, detail.detail.value.length - 1);
+      money = detail.substring(0, detail.length - 1);
     }
     this.setData({
       amount: money,
     })
   },
+  // 失焦时补0
+  amountBlur({detail}) {
+    this.setData({
+      amount:parseFloat(detail.value).toFixed(2),
+    })
+  },
+
+  handleDateChange({detail}) {
+    this.setData({
+      date: detail.value,
+    });
+  },
+
+  // 图片上传至云
+  uploadPicture(event) {
+    const { file } = event.detail;
+    if(file){
+      wx.cloud.uploadFile({
+        // 指定上传到的云路径
+        cloudPath: `my-photo${event.timeStamp}.png`,
+        // 指定要上传的文件的小程序临时文件路径
+        filePath: file.path,
+        // 成功回调
+        success: res => {
+          console.log('上传成功', res);
+         // let newFileList = data.fileList.concat([{url: res.fileID}]);
+         let newFileList = [
+           ...this.data.fileList,
+           {url: res.fileID}
+          ];
+          this.setData({fileList: newFileList });
+        },
+        fail: console.error
+      })
+    }
+  },
+  //删除图片
+  picListChange( {detail}) {
+    let newFileList = this.data.fileList.filter((item,index) => {
+      detail.index != index
+    })
+    this.setData({fileList: newFileList });
+  },
+
   // 添加记账
   handleOk() {
-
-    wx.navigateBack({})
-  }
+    let { account,amount,remark,recordType,fileList } = this.data;
+    let recordType_f = constant.dict.typeDict_f.get(this.data.recordTypeList[0][recordType[0]]);//第一分类 
+    let recordType_s = constant.dict.typeDict_s.get(this.data.recordTypeList[1][recordType[1]]);//第二分类
+    let fileUrl = fileList.map( item => {
+      return item.url;
+    }).join(";");
+    let data = {
+      status: this.data.currentType,
+      recordDateStr: this.data.date,
+      account: constant.dict.accountDict.get(account),
+      amount: this.data.currentType == 'in' ? amount : ('-' + amount),
+      remark,fileUrl,
+      recordType_f,
+      recordType_s,
+    }
+    wx.cloud.callFunction({
+      name: 'add',// 云函数名称
+      data: data,
+      success: function(res) {
+        //console.log(res.result) 
+        wx.navigateBack({})
+      },
+      fail: console.error
+    })
+  },
 })

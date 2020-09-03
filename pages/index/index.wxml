@@ -1,32 +1,36 @@
 <!--index.wxml-->
 <import src="../../component/template/footTabBar.wxml"/>
+
 <view class="container">
   <view class="add-button">
-    <i-button bind:click="gotoAdd" size="small" type="success" shape="circle">
-      <i-icon type="brush_fill"/>记一笔
-      <!-- 点击跳转 记账页面 -->
-    </i-button>
+    <van-button bind:click="gotoAdd" round type="danger" icon="edit">
+    记一笔
+    <!-- 点击跳转 记账页面 -->
+    </van-button>
   </view>
   <view class="cd-circle" style="margin-top: 30px;" hover-class="hover"> 
-    <i-icon type="createtask" size="20"/>
+    <van-icon name="todo-list-o" size="25px"/>
     <view class="icon-text" bindtap="getHistory">账单记录</view>
     <!-- 点击账单记录，跳转账单记录，可查询所有历史账单 -->
   </view>
 
   <!-- 今天、昨天的账单记录 -->
   <view class="record-block">
-    <view class="record-detail" wx:for="{{['昨天', '今天']}}">
-      <text>{{item}}(-20.0)</text>
-      <view style="overflow-y: auto;max-height: 200px;">
-        <view wx:for="{{[1, 2, 3,4,5,6]}}" class="detail-type" 
-          hover-class="hover" bindtap="getDetail">
-        <view class="type" style="width: 40%">
-          <i-icon type="createtask" size="20"/>
-          <view class="type-text1">类别</view>
+    <view class="record-detail" wx:for="{{two_daysList}}" wx:for-item="dayItem" wx:key="dayItem">
+      <text>{{dayItem.label + 
+      "(" + (dayItem.totalAmount >= 0 ? "+" : "") + dayItem.totalAmount + ")"}}</text>
+      <view style="overflow-y: auto;max-height: 80%;">
+        <view wx:for="{{dayItem.list}}" class="detail-type" 
+        wx:key="item" hover-class="hover" bindtap="getDetail">
+        <view class="type" style="width: 45%">
+          <van-icon name="bars" size="20px"/>
+          <view class="type-text1">
+          {{ item.recordType_fStr + '|' +item.recordType_sStr }}
+          </view>
         </view>
-        <view class="type" style="width: 60%;text-align: left;">
-          <text>金额1111</text>
-          <view class="type-text2">备注</view>
+        <view class="type" style="width: 55%;text-align: left;">
+          <text>{{(item.status == 'in' ? '+' : '') + item.amount}}</text>
+          <view class="type-text2">{{ item.remark }}</view>
         </view>
         </view>
       </view>
@@ -37,6 +41,6 @@
   <view class="split-border"></view>
 
   <view class="footer">
-    <template is="footTabBar" data="{{currentTab}}"></template>
+    <template is="footTabBar" data="{{activeTab}}"></template>
   </view>
 </view>

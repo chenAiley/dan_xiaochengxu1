@@ -1,10 +1,4 @@
 /* pages/add/index.wxss */
-.add-head{
-  width: 100%;
-  margin-left: 40rpx;
-  display: flex;
-  flex-direction: row;
-}
 .add-type{
   width: 100%;
   display: flex;
@@ -33,9 +27,11 @@
   justify-content: flex-end;
   margin-right: 15px;
 }
-.my-amount{
+.amount-info .van-cell{
   padding: 0 !important;
-  height: 20px !important;
+}
+.amount-info .van-cell__left-icon-wrap {
+  font-size: 24px !important;
 }
 .amount-text{
   color: #ed3f14;
@@ -50,17 +46,16 @@
   flex-direction: row;
 }
 .remark-icon{
-  padding: 5px;
+  padding: 10px;
 }
 .remark-input{
   padding: 0 10px !important;
 }
-.add-type{
-  margin-top: 10px;
+.add-type-detail{
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
 }
 .type-detail{
   border-right: 1px solid #999;

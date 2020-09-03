@@ -1,13 +1,16 @@
 //index.js
 //获取应用实例
 const app = getApp()
+var dateJS = require('../../js/date.js');  
+var constant2 = require('../../js/constant2.js');  
 
 Page({
   data: {
     userInfo: {},
-    currentTab: app.globalData.currentTab,
+    activeTab: app.globalData.activeTab,
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    two_daysList: [], //两天的账单记录
   },
   //事件处理函数
   bindViewTap: function() {
@@ -51,6 +54,12 @@ Page({
       hasUserInfo: true
     })
   },
+
+  onShow: function () {
+    this.getRecordList();
+
+  },
+
   // 跳转记账页面
   gotoAdd: function() {
     wx.navigateTo({ url: '../../pages/add/index?id=1&other=111' })
@@ -81,8 +90,54 @@ Page({
   },
   handleTabChange: function ({ detail }) {
     this.setData({
-      currentTab: detail.key
+      activeTab: detail
     });
-    app.globalData.currentTab = detail.key;
-  }
+    app.globalData.activeTab = detail;
+  },
+
+  // 获取昨天和今天的账单记录
+  getRecordList() {
+    let lastDay = new Date().getTime() - 24*60*60*1000;
+    let lastDayStr = dateJS.formatTime(new Date(lastDay)).substring(0,10);
+    let todayStr = dateJS.formatTime(new Date()).substring(0,10);
+    let dayStrMap = new Map([
+      [lastDayStr, '昨天'],
+      [todayStr, '今天'],
+    ])
+    let that = this;
+    wx.cloud.callFunction({
+      name: 'getRecordList',// 云函数名称
+      data: {
+        startDate: lastDayStr + " 00:00:00",
+        endDate: todayStr + " 23:59:59",
+        sortField: 'recordDate',
+        sortType: 'asc'
+      },
+      success: function(res) {
+        console.log(res.result) 
+        let tempArr = res.result.data.map(item => {
+          let tempList = item.list.map(recordItem => {
+            return {
+              ...recordItem,
+              amount : recordItem.amount.toFixed(2),
+              remark: recordItem.remark.length > 8 ? recordItem.remark.substring(0,8) + '...' : recordItem.remark,
+              recordType_fStr : constant2.dict.typeDict_f.get(recordItem.recordType_f),
+              recordType_sStr : constant2.dict.typeDict_s.get(recordItem.recordType_s),
+            }
+          })
+          return {
+            //recordDateStr: recordDateStr
+            list: tempList,
+            label: dayStrMap.get(item.recordDateStr),
+            totalAmount: item.totalAmount.toFixed(2) 
+          }
+        })
+        console.log(tempArr)
+        that.setData({
+          two_daysList: tempArr,
+        });
+      },
+      fail: console.error
+    })
+  },
 })

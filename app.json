@@ -4,8 +4,7 @@
     "pages/add/index",
     "pages/history/index",
     "pages/detail/index",
-    "pages/logs/logs",
-    "pages/test/index"
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,5 +15,16 @@
   "sitemapLocation": "sitemap.json",
   "networkTimeout": {
     "request": 3000
+  },
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-calendar": "@vant/weapp/calendar/index"
   }
 }

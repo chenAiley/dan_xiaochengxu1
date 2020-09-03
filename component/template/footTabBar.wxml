@@ -1,8 +1,9 @@
 <!-- 底部导航栏模板 -->
 <template name="footTabBar">
-  <i-tab-bar current="{{ currentTab }}" color="#ed3f14" bindchange="handleTabChange" style="width: 100%;">
-    <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="记账"></i-tab-bar-item>
-    <i-tab-bar-item key="group" icon="dynamic" current-icon="dynamic_fill" title="资产"></i-tab-bar-item>
-    <i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" title="我的"></i-tab-bar-item>
-  </i-tab-bar>
+  <van-tabbar active="{{ activeTab }}" bind:change="handleTabChange"
+  active-color="#ed3f14">
+    <van-tabbar-item icon="wap-home" name="homepage">记账</van-tabbar-item>
+    <van-tabbar-item icon="bill" name="amount">资产</van-tabbar-item>
+    <van-tabbar-item icon="manager" name="mine">我的</van-tabbar-item>
+  </van-tabbar>
 </template>
