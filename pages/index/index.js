@@ -11,6 +11,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     two_daysList: [], //两天的账单记录
+    isFind: false,//是否查询过数据库
   },
   //事件处理函数
   bindViewTap: function() {
@@ -97,6 +98,8 @@ Page({
 
   // 获取昨天和今天的账单记录
   getRecordList() {
+    let that = this;
+    that.data.isFind = false;
     let lastDay = new Date().getTime() - 24*60*60*1000;
     let lastDayStr = dateJS.formatTime(new Date(lastDay)).substring(0,10);
     let todayStr = dateJS.formatTime(new Date()).substring(0,10);
@@ -104,7 +107,6 @@ Page({
       [lastDayStr, '昨天'],
       [todayStr, '今天'],
     ])
-    let that = this;
     wx.cloud.callFunction({
       name: 'getRecordList',// 云函数名称
       data: {
@@ -114,30 +116,36 @@ Page({
         sortType: 'asc'
       },
       success: function(res) {
-        console.log(res.result) 
+        that.setData({
+          isFind: false,
+        });
         let tempArr = res.result.data.map(item => {
           let tempList = item.list.map(recordItem => {
             return {
               ...recordItem,
               amount : recordItem.amount.toFixed(2),
-              remark: recordItem.remark.length > 8 ? recordItem.remark.substring(0,8) + '...' : recordItem.remark,
-              recordType_fStr : constant2.dict.typeDict_f.get(recordItem.recordType_f),
-              recordType_sStr : constant2.dict.typeDict_s.get(recordItem.recordType_s),
+              remark: recordItem.remark.length > 6 ? recordItem.remark.substring(0,6) + '...' : recordItem.remark,
+              recordType_fStr : constant2.dict[recordItem.status + 'TypeDict_f'].get(recordItem.recordType_f),
+              recordType_sStr : constant2.dict[recordItem.status + 'TypeDict_s'].get(recordItem.recordType_s),
             }
           })
           return {
-            //recordDateStr: recordDateStr
             list: tempList,
             label: dayStrMap.get(item.recordDateStr),
             totalAmount: item.totalAmount.toFixed(2) 
           }
         })
-        console.log(tempArr)
         that.setData({
+          isFind: true,
           two_daysList: tempArr,
         });
       },
       fail: console.error
     })
   },
+  //跳转编辑页面（add）
+  gotoEdit: function(e) {
+    console.log("edit")
+    wx.navigateTo({ url: '../../pages/add/index?id='+ e.currentTarget.dataset.id })
+  }
 })

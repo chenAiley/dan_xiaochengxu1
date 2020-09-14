@@ -10,35 +10,44 @@
   </view>
   <view class="cd-circle" style="margin-top: 30px;" hover-class="hover"> 
     <van-icon name="todo-list-o" size="25px"/>
-    <view class="icon-text" bindtap="getHistory">账单记录</view>
     <!-- 点击账单记录，跳转账单记录，可查询所有历史账单 -->
+    <view class="icon-text" bindtap="getHistory">账单记录</view>
   </view>
 
   <!-- 今天、昨天的账单记录 -->
+  <view wx:if="{{ isFind && (!two_daysList || two_daysList.length == 0)}}" style="margin-top: 20px;">
+      <text>最近两天都没有账单记录呢</text>
+  </view>
   <view class="record-block">
     <view class="record-detail" wx:for="{{two_daysList}}" wx:for-item="dayItem" wx:key="dayItem">
       <text>{{dayItem.label + 
       "(" + (dayItem.totalAmount >= 0 ? "+" : "") + dayItem.totalAmount + ")"}}</text>
       <view style="overflow-y: auto;max-height: 80%;">
-        <view wx:for="{{dayItem.list}}" class="detail-type" 
-        wx:key="item" hover-class="hover" bindtap="getDetail">
-        <view class="type" style="width: 45%">
-          <van-icon name="bars" size="20px"/>
-          <view class="type-text1">
-          {{ item.recordType_fStr + '|' +item.recordType_sStr }}
+        <view wx:for="{{dayItem.list}}" class="detail-type" hover-class="hover" 
+        wx:key="item" data-id="{{item._id}}" bindtap="getDetail">
+          <view class="type" style="width: 40%">
+            <van-icon name="bars" size="20px"/>
+            <view class="type-text1">
+            {{ item.recordType_fStr + '|' +item.recordType_sStr }}
+            </view>
+          </view>
+          <view class="type" style="width: 50%;text-align: left;">
+            <text>{{(item.status == 'in' ? '+' : '') + item.amount}}</text>
+            <view class="type-text2">{{ item.remark }}</view>
+          </view>
+          <!-- 可编辑 -->
+          <view style="display: flex;width: 10%" data-id="{{item._id}}" 
+          capture-catch:touchstart="gotoEdit">
+            <van-icon name="edit" color="#ff976a"/>
           </view>
         </view>
-        <view class="type" style="width: 55%;text-align: left;">
-          <text>{{(item.status == 'in' ? '+' : '') + item.amount}}</text>
-          <view class="type-text2">{{ item.remark }}</view>
-        </view>
-        </view>
       </view>
+    
     </view>
   </view>
 
 <!-- 中间分隔线 -->
-  <view class="split-border"></view>
+  <view wx:if="{{two_daysList && two_daysList.length == 2}}" class="split-border"></view>
 
   <view class="footer">
     <template is="footTabBar" data="{{activeTab}}"></template>

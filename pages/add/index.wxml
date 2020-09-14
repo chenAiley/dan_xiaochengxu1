@@ -7,15 +7,12 @@
       <van-tab name="in" title="收入"></van-tab>
     </van-tabs>
   </view>
-  <van-cell title="选择单个日期" value="{{ date }}" bind:click="onDisplay" />
-  <van-calendar show="{{ dateShow }}" bind:close="onClose" bind:confirm="onConfirm" />     
 
   <view class="add-detail">
     <view class="add-info">
       <view class="date-info"  style="width: 40%;">
-        <!-- <text bindtap="onDateDisplay">{{date}}</text>
-        <van-calendar show="{{ dateShow }}" bind:close="onDateClose" bind:confirm="onDateConfirm" /> -->
-        <picker mode="date" value="{{date}}" bindchange="handleDateChange">
+        <picker mode="date" value="{{date}}" bindchange="handleDateChange"
+        end="{{endDate}}">
           {{date}}
         </picker>
       </view>
@@ -42,7 +39,7 @@
       </view>
       <view>
         <picker mode="multiSelector" value="{{recordType}}" 
-          range="{{recordTypeList}}" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange">
+          range="{{recordTypeList }}" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange">
           <text class="temp-text">{{recordTypeList[0][recordType[0]]}} </text>
           <text style="color: #999"> | </text>
           <text style="color: #ff9900">{{recordTypeList[1][recordType[1]]}}</text>

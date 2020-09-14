@@ -6,14 +6,14 @@ const dict = {
     ["储蓄卡",'cxk'],
     ["信用卡",'xyk'],
   ]),
-  typeDict_f: new Map([
+  outTypeDict_f: new Map([
     ["吃",'chi'],
     ["穿",'chuan'],
     ["用",'yong'],
     ["住",'zhu'],
     ["行",'xing'],
   ]),
-  typeDict_s: new Map([
+  outTypeDict_s: new Map([
     [ "餐饮","chi_1"],
     [ "水果","chi_2"],
     [ "零食","chi_3"],
@@ -35,6 +35,37 @@ const dict = {
     [ "火车高铁","xing_3"], 
     [ "飞机","xing_4"],
     [ "其他", "xing_99"]
+  ]),
+  inTypeDict_f: new Map([
+    ["工作",'work'],
+    ["人情",'favor'],
+    ["兼职",'part-time'],
+    ["其他",'other'],
+  ]),
+  inTypeDict_s: new Map([
+    [ "工资","work_1"],
+    [ "奖金","work_2"],
+    [ "福利","work_3"],
+    [ "报销","work_4"],
+    [ "其他","work_99"],
+
+    [ "生活费","favor_1"],
+    [ "零花钱","favor_2"],
+    [ "红包","favor_3"],
+    [ "礼金","favor_4"], 
+    [ "压岁钱","favor_5"],
+    [ "其他","favor_99"],
+
+    [ "兼职","pt_1"],
+    [ "打赏","pt_2"], 
+    [ "广告费","pt_3"],
+    [ "其他","pt_99"],
+
+    [ "理财","other_1"],
+    [ "利息","other_2"],
+    [ "借款","other_3"], 
+    [ "退款","other_4"], 
+    [ "其他", "other_99"]
   ]),
 }
 
