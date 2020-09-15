@@ -40,3 +40,6 @@
   position: fixed;
   top: 600rpx;
 }
+.van-dropdown-menu{
+  height: 20px !important;
+}

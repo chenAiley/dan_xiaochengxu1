@@ -12,8 +12,14 @@ Page({
     currentType: 'out',
     date: dateJS.formatTime(new Date()).substring(0,10),
     endDate: dateJS.formatTime(new Date()).substring(0,10),
-    account: '支付宝',
-    accountList: ["支付宝","微信","现金","储蓄卡","信用卡"],
+    account: 'zfb',
+    accountList: [
+      {text: "支付宝", value: 'zfb'},
+      {text: "微信", value: 'wx'},
+      {text: "现金", value: 'xj'},
+      {text: "储蓄卡", value: 'cxk'},
+      {text: "信用卡", value: 'xyk'}
+    ],
     amount: '0.00',
     //支出记账类型
     outTypeList: [
@@ -60,6 +66,9 @@ Page({
   onLoad: function (options) {
     let that = this;
     let id = options.id;
+    if(!id){
+      return;
+    }
     console.log(id);
     wx.cloud.callFunction({
       name: 'findRecordById',// 云函数名称
@@ -77,7 +86,6 @@ Page({
             typeS_index = [arr[item].index, arr[item].list.indexOf(recordType_sStr)]
             break;
           }
-          
         }
       
         that.setData({
@@ -85,7 +93,7 @@ Page({
           recordTypeList: [that.data.recordTypeList[0], that.data[resData.status + 'TypeList'][typeS_index[0]]],
           currentType: resData.status,
           date: resData.recordDateStr,
-          account: constant2.dict.accountDict.get(resData.account),
+          account: resData.account,
           amount: Math.abs(resData.amount).toFixed(2),
           remark: resData.remark,
           recordType: [typeF_index, typeS_index[1]],
@@ -263,7 +271,7 @@ Page({
     let data = {
       status: this.data.currentType,
       recordDateStr: this.data.date,
-      account: constant.dict.accountDict.get(account),
+      account,
       amount: this.data.currentType == 'in' ? amount : ('-' + amount),
       remark,fileUrl,
       recordType_f,

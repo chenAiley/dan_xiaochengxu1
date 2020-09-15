@@ -22,7 +22,7 @@
     <view class="record-detail" wx:for="{{two_daysList}}" wx:for-item="dayItem" wx:key="dayItem">
       <text>{{dayItem.label + 
       "(" + (dayItem.totalAmount >= 0 ? "+" : "") + dayItem.totalAmount + ")"}}</text>
-      <view style="overflow-y: auto;max-height: 80%;">
+      <view style="overflow-y: auto;max-height: 280px;margin-top:10px;">
         <view wx:for="{{dayItem.list}}" class="detail-type" hover-class="hover" 
         wx:key="item" data-id="{{item._id}}" bindtap="getDetail">
           <view class="type" style="width: 40%">

@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/detail/index",
     "pages/add/index",
     "pages/history/index",
-    "pages/detail/index",
     "pages/logs/logs"
   ],
   "window": {
@@ -25,6 +25,9 @@
     "van-tabs": "@vant/weapp/tabs/index",
     "van-field": "@vant/weapp/field/index",
     "van-uploader": "@vant/weapp/uploader/index",
-    "van-calendar": "@vant/weapp/calendar/index"
+    "van-calendar": "@vant/weapp/calendar/index",
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index"
   }
 }

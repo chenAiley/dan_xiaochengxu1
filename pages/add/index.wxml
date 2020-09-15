@@ -17,9 +17,12 @@
         </picker>
       </view>
       <view class="date-info" style="width: 30%;">
-        <picker value="{{account}}" bindchange="handleAccountChange" range="{{objectAccountList}}">
+        <!-- <picker value="{{account}}" bindchange="handleAccountChange" range="{{accountList}}">
           {{account}}
-        </picker>
+        </picker> -->
+        <van-dropdown-menu active-color="#ee0a24">
+          <van-dropdown-item value="{{ account }}" options="{{ accountList }}" />
+        </van-dropdown-menu>
       </view>
       <view class="amount-info" style="width: 30%;">
         <text class="amount-text">{{ currentType === 'out' ? '-' : '+'}}</text>
@@ -34,16 +37,20 @@
     </view>
     <!-- 账单类别 -->
     <view class="add-type-detail">
-      <view style="width: 40px;text-align: center; color: #ed3f14">
+      <view class="type-detail"style="">
         <van-icon name="smile-o" size="28px"/>
       </view>
-      <view>
+      <view class="type-dropdown">
         <picker mode="multiSelector" value="{{recordType}}" 
           range="{{recordTypeList }}" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange">
           <text class="temp-text">{{recordTypeList[0][recordType[0]]}} </text>
           <text style="color: #999"> | </text>
           <text style="color: #ff9900">{{recordTypeList[1][recordType[1]]}}</text>
         </picker>
+        <!-- <van-dropdown-menu>
+          <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
+          <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}" />
+        </van-dropdown-menu> -->
       </view>
     </view>
 

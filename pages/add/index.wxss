@@ -56,12 +56,17 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 .type-detail{
-  border-right: 1px solid #999;
-  text-align: center;
+  width: 40px;
+  text-align: center; 
+  color: #ed3f14;
   display: flex;
-  justify-content: center;
+}
+.type-dropdown{
+  display: flex;
+  justify-content: space-evenly;
 }
 .temp-text{
   font-size: 12px;

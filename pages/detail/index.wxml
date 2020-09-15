@@ -1,2 +1,18 @@
 <!--pages/detail/index.wxml-->
-<text>pages/detail/index.wxml</text>
+<view class="container">
+  <view class="detail-info">
+    <view class="detai-title">账单详情</view>
+    <view class="detail-body">
+      <view>收/支</view>
+      <view>账户</view>
+      <view>时间</view>
+      <view>备注</view>
+      <view>图片</view>
+    </view>
+    <view class="detail-footer">
+      <van-button round color="#ed3f14" style="width: 150px;">去编辑</van-button>
+    </view>
+  </view>
+  
+</view>
+
